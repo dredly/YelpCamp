@@ -1,0 +1,40 @@
+module.exports.descriptors = [
+    'Special',
+    'Fabulous',
+    'Rusty',
+    'Creaky',
+    'Rustic',
+    'Scenic',
+    'Misty',
+    'Cloudy',
+    'Sunny',
+    'Foggy',
+    'Peaceful',
+    'Adventurous',
+    'Intrepid',
+    'Frozen',
+    'Idyllic'
+];
+
+module.exports.places = [
+    'Valley',
+    'Peaks',
+    'Brook',
+    'Creek',
+    'Village',
+    'Hamlet',
+    'Pass',
+    'Glacier',
+    'Delta',
+    'Basin',
+    'Pools',
+    'Falls',
+    'Beach',
+    'Cliffs',
+    'Trails',
+    'Forest',
+    'Woods',
+    'Plains',
+    'Meadows',
+    'Canyon'
+];
