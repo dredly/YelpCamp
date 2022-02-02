@@ -2,13 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const ejsMate = require('ejs-mate');
-const { campgroundSchema, reviewSchema } = require('./schemas');
+const session = require('express-session');
 const methodOverride = require('method-override');
-const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const Campground = require('./models/campground');
-const Review = require('./models/review');
-
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
 
@@ -26,6 +22,16 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+const sessionConfig = {
+    secret: 'ilikebountychocolatebars', resave: false, saveUninitialized: true, cookie: {
+        httpOnly: true,
+        // Expires in a week
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
