@@ -4,6 +4,7 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
@@ -32,10 +33,16 @@ const sessionConfig = {
 }
 
 app.use(session(sessionConfig));
+app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 
 app.get('/', (req, res) => {
     res.render('home');
