@@ -5,6 +5,9 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 const ExpressError = require('./utils/ExpressError');
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
@@ -37,6 +40,12 @@ app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session()); // Make sure session is used before this
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
@@ -44,8 +53,12 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res) => {
-    res.render('home');
+app.get('/fakeUser', async (req, res) => {
+    const user = new User({
+        email: 'miguel@gmail.com', username: 'mig'
+    });
+    const newUser = await User.register(user, 'miguel123');
+    res.send(newUser);
 })
 
 app.use('/campgrounds', campgrounds);
