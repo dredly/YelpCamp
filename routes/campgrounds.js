@@ -49,18 +49,32 @@ router.get('/:id/edit', loginRequired, catchAsync(async (req, res) => {
         req.flash('error', 'Cannot find that campground');
         return res.redirect('/campgrounds');
     }
+    if (!campground.author.equals(req.user._id)) {
+        req.flash('error', 'Wait, that\'s illegal!');
+        return res.redirect(`/campgrounds/${campground._id}`);
+    }
     res.render('campgrounds/edit', { campground });
 }))
 
 router.put('/:id', loginRequired, validateCampground, catchAsync(async (req, res) => {
     const { id } = req.params;
-    const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
+    const campground = await Campground.findById(id);
+    if (!campground.author.equals(req.user._id)) {
+        req.flash('error', 'Wait, that\'s illegal!');
+        return res.redirect(`/campgrounds/${campground._id}`);
+    }
+    const authorisedCampground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
     req.flash('success', 'Successfully updated campground');
-    res.redirect(`/campgrounds/${campground._id}`);
+    res.redirect(`/campgrounds/${authorisedCampground._id}`);
 }))
 
 router.delete('/:id', loginRequired, catchAsync(async (req, res) => {
     const { id } = req.params;
+    const campground = await Campground.findById(id);
+    if (!campground.author.equals(req.user._id)) {
+        req.flash('error', 'Wait, that\'s illegal!');
+        return res.redirect(`/campgrounds/${campground._id}`);
+    }
     await Campground.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted campground');
     res.redirect('/campgrounds');
