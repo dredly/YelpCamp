@@ -4,3 +4,4 @@
 - [ ] Add a confirm password field to the register form
 - [ ] Display average rating of a campground
 - [ ] Timestamps on reviews
+- [ ] Frontend validation to prevent 0 star reviews
