@@ -22,9 +22,26 @@ const seedDB = async () => {
             author: '62017a071086ebc2b80d1a55',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            image: 'http://source.unsplash.com/collection/483251',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta interdum mauris, non iaculis augue tempor efficitur. Nulla magna ex, iaculis luctus porttitor id, convallis eu turpis. In eleifend enim vitae quam eleifend, a laoreet lorem tempus. Fusce condimentum tincidunt metus, euismod dapibus felis commodo in. Vivamus tempor lectus ut eleifend euismod. Aliquam erat volutpat. Morbi nibh enim, consectetur vitae lobortis sed, pretium vel neque. In hac habitasse platea dictumst. Integer non lacus mauris. Pellentesque ac sapien gravida mauris fringilla congue.',
-            price
+            price,
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/doemj9gq6/image/upload/v1644970571/YelpCamp/l5lubaqxexpht2tco3yz.jpg',
+                    filename: 'YelpCamp/l5lubaqxexpht2tco3yz',
+                },
+                {
+                    url: 'https://res.cloudinary.com/doemj9gq6/image/upload/v1644970571/YelpCamp/abzm56kqtstj0llumpiz.jpg',
+                    filename: 'YelpCamp/abzm56kqtstj0llumpiz',
+                },
+                {
+                    url: 'https://res.cloudinary.com/doemj9gq6/image/upload/v1644970571/YelpCamp/fz1smm7waazjxrxsgsru.jpg',
+                    filename: 'YelpCamp/fz1smm7waazjxrxsgsru',
+                },
+                {
+                    url: 'https://res.cloudinary.com/doemj9gq6/image/upload/v1644970573/YelpCamp/i3k1ljdbyird3hupsykb.jpg',
+                    filename: 'YelpCamp/i3k1ljdbyird3hupsykb',
+                }
+            ]
         });
         await camp.save();
     }
