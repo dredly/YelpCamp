@@ -1,4 +1,8 @@
 const Campground = require('../models/campground');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mbxToken = process.env.MAPBOX_TOKEN;
+// Contains methods for both forward and reverse geocoding
+const geocoder = mbxGeocoding({ accessToken: mbxToken });
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async (req, res) => {
@@ -11,13 +15,17 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.create = async (req, res, next) => {
-    const campground = new Campground(req.body.campground);
-    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
-    campground.author = req.user._id;
-    await campground.save();
-    console.log(campground);
-    req.flash('success', 'Successfully created new campground');
-    res.redirect(`/campgrounds/${campground._id}`);
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.campground.location
+    }).send();
+    res.send(geoData.body.features[0].geometry.coordinates);
+    // const campground = new Campground(req.body.campground);
+    // campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    // campground.author = req.user._id;
+    // await campground.save();
+    // console.log(campground);
+    // req.flash('success', 'Successfully created new campground');
+    // res.redirect(`/campgrounds/${campground._id}`);
 }
 
 module.exports.show = async (req, res) => {
