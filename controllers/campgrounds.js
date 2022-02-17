@@ -18,14 +18,14 @@ module.exports.create = async (req, res, next) => {
     const geoData = await geocoder.forwardGeocode({
         query: req.body.campground.location
     }).send();
-    res.send(geoData.body.features[0].geometry.coordinates);
-    // const campground = new Campground(req.body.campground);
-    // campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
-    // campground.author = req.user._id;
-    // await campground.save();
-    // console.log(campground);
-    // req.flash('success', 'Successfully created new campground');
-    // res.redirect(`/campgrounds/${campground._id}`);
+    const campground = new Campground(req.body.campground);
+    campground.geometry = geoData.body.features[0].geometry;
+    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    campground.author = req.user._id;
+    await campground.save();
+    console.log(campground);
+    req.flash('success', 'Successfully created new campground');
+    res.redirect(`/campgrounds/${campground._id}`);
 }
 
 module.exports.show = async (req, res) => {
