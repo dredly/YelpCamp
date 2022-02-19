@@ -1,0 +1,11 @@
+body {
+    height: 100vh;
+}
+
+.cover-container {
+    max-width: 60vw;
+}
+
+.boldfont {
+    font-weight: bold;
+}
