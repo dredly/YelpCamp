@@ -7200,15 +7200,6 @@ module.exports = [
         state: "New York",
     },
     {
-        city: "Coeur d'Alene",
-        growth_from_2000_to_2013: "32.8%",
-        latitude: 47.6776832,
-        longitude: -116.7804664,
-        population: "46402",
-        rank: "801",
-        state: "Idaho",
-    },
-    {
         city: "San Luis Obispo",
         growth_from_2000_to_2013: "4.4%",
         latitude: 35.2827524,
