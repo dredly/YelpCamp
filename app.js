@@ -2,7 +2,6 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-
 const express = require('express');
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -21,7 +20,9 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+// const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://localhost:27017/yelp-camp';
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, "connection error"));
@@ -95,6 +96,7 @@ app.use(
                 "data:",
                 `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
                 "https://images.unsplash.com/",
+                "https://unsplash.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
