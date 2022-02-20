@@ -2,7 +2,7 @@
 
 <div class="row">
     <h1 class="text-center">Edit Campground</h1>
-    <div class="col-6 offset-3">
+    <div class="col-md-6 offset-md-3">
         <form action="/campgrounds/<%= campground._id %>?_method=PUT" , method="POST" novalidate class="validated-form"
             enctype="multipart/form-data">
             <div class="mb-3">
@@ -45,13 +45,18 @@
                     Looks good!
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-wrap">
                 <% campground.images.forEach((img, i) => { %>
-                <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
-                <div class="form-check-inline">
-                    <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
+                <div>
+                    <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                    <div>
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%= i %>" name="deleteImages[]"
+                                value="<%= img.filename %>">
+                        </div>
+                        <label for="image-<%= i %>">Delete?</label>
+                    </div>
                 </div>
-                <label for="image-<%= i %>">Delete?</label>
                 <% }) %>
             </div>
             <div class="mb-3">
