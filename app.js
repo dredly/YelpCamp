@@ -35,8 +35,10 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 const sessionConfig = {
-    secret: 'ilikebountychocolatebars', resave: false, saveUninitialized: true, cookie: {
+    name: 'e8b6b885a07ca12d3d74ad57fe8220e889d2001d05fae019',
+    secret: '7c9aa9dd52516a11c97efee82bed829153c70aca83e6fd2b', resave: false, saveUninitialized: true, cookie: {
         httpOnly: true,
+        // secure: true,
         // Expires in a week
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
