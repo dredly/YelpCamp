@@ -15,6 +15,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const ExpressError = require('./utils/ExpressError');
+const MongoStore = require('connect-mongo');
 
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
@@ -36,7 +37,18 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret: process.env.MONGO_STORE_SECRET,
+    touchAfter: 24 * 60 * 60
+})
+
+store.on("error", function (err) {
+    console.log('Session store error ' + err);
+})
+
 const sessionConfig = {
+    store,
     name: 'e8b6b885a07ca12d3d74ad57fe8220e889d2001d05fae019',
     secret: '7c9aa9dd52516a11c97efee82bed829153c70aca83e6fd2b', resave: false, saveUninitialized: true, cookie: {
         httpOnly: true,
