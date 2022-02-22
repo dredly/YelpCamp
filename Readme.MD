@@ -8,6 +8,7 @@ I have completed the bootcamp so am now adding extra features.
 ## Ideas for future improvements
 - [x] Display average rating of a campground
 - [x] Frontend validation to prevent 0 star reviews
+- [x] Fix bug where using non JSON friendly characters in the review messes up maps. Probably do this by getting the campground geo info with an AJAX request from the frontend
 - [ ] Pagination of campgrounds
 - [ ] Display campground ratings on the index page
 - [ ] Add ability to sort campgrounds by rating

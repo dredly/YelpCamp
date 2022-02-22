@@ -1,5 +1,8 @@
+let dbUrl = process.env.DB_URL
+
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
+    dbUrl = 'mongodb://localhost:27017/yelp-camp';
 }
 
 const express = require('express');
@@ -20,8 +23,8 @@ const MongoStore = require('connect-mongo');
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
+const apiRoutes = require('./routes/api');
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -131,6 +134,7 @@ app.use((req, res, next) => {
 app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes);
+app.use('/api', apiRoutes);
 
 app.get('/', (req, res) => {
     res.render('home');
