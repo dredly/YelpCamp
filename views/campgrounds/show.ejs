@@ -54,8 +54,8 @@
         <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="validated-form mb-3"
             id="rating-form" novalidate>
             <p id="stars-feedback" class="mb-2">Please rate between 1 and 5 stars</p>
-            <fieldset class="starability-basic">
-                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+            <fieldset class="starability-basic" id="rating-selection">
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked
                     aria-label="Default rating 1 star" />
                 <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                 <label for="first-rate1" title="Terrible">1 star</label>
