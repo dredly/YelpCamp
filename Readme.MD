@@ -9,6 +9,8 @@ I have completed the bootcamp so am now adding extra features.
 - [x] Display average rating of a campground
 - [ ] Frontend validation to prevent 0 star reviews
 - [ ] Pagination of campgrounds
+- [ ] Display campground ratings on the index page
+- [ ] Add ability to sort campgrounds by rating
 - [ ] Turn into YelpCastle and use web scraping to generate my own castles dataset
 - [ ] Fully Responsive layout
 - [ ] Add a confirm password field to the register form

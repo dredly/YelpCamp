@@ -1,6 +1,5 @@
 mapboxgl.accessToken = mbToken;
 const geometry = JSON.parse(campground).geometry;
-console.log(geometry);
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL

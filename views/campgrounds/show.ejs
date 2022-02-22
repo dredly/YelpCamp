@@ -51,7 +51,9 @@
         <div id="map"></div>
         <% if (currentUser) { %>
         <h2>Leave a Review</h2>
-        <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="validated-form mb-3" novalidate>
+        <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="validated-form mb-3"
+            id="rating-form" novalidate>
+            <p id="stars-feedback" class="mb-2">Please rate between 1 and 5 stars</p>
             <fieldset class="starability-basic">
                 <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
                     aria-label="Default rating 1 star" />
@@ -105,3 +107,6 @@
 </script>
 
 <script src="/scripts/showPageMap.js"></script>
+<% if (currentUser) { %>
+<script src="/scripts/extraStarValidation.js"></script>
+<% } %>
